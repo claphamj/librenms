@@ -8,230 +8,60 @@
  * @author     LukeKelsall <l.kelsall@b4rn.org.uk>
  */
 
-//Creates Zyxel port array
-$zyxel_ports = array(
-    "swp00" => "1/01",
-    "swp01" => "1/02",
-    "swp02" => "1/03",
-    "swp03" => "1/04",
-    "swp04" => "1/05",
-    "swp05" => "1/06",
-    "swp06" => "1/07",
-    "swp07" => "1/08",
-    "swp08" => "1/09",
-    "swp09" => "1/10",
-    "swp10" => "1/11",
-    "swp11" => "1/12",
-    "swp12" => "1/13",
-    "swp13" => "1/14",
-    "swp14" => "1/15",
-    "swp15" => "1/16",
-    "swp16" => "1/17",
-    "swp17" => "1/18",
-    "swp18" => "1/19",
-    "swp19" => "1/20",
-    "swp20" => "1/21",
-    "swp21" => "1/22",
-    "swp22" => "1/23",
-    "swp23" => "1/24",
-    "swp24" => "1/25",
-    "swp25" => "1/26",
-    "swp26" => "1/27",
-    "swp27" => "1/28",
-    "swp28" => "1/29",
-    "swp29" => "1/30",
-    "swp30" => "1/31",
-    "swp31" => "1/32",
-    "swp32" => "1/33",
-    "swp33" => "1/34",
-    "swp34" => "1/35",
-    "swp35" => "1/36",
-    "swp36" => "1/37",
-    "swp37" => "1/38",
-    "swp38" => "1/39",
-    "swp39" => "1/40",
-    "swp40" => "1/41",
-    "swp41" => "1/42",
-    "swp42" => "1/43",
-    "swp43" => "1/44",
-    "swp44" => "1/45",
-    "swp45" => "1/46",
-    "swp46" => "1/47",
-    "swp47" => "1/48",
-    "swp48" => "1/49",
-    "swp49" => "1/50",
-    "swp64" => "2/01",
-    "swp65" => "2/02",
-    "swp66" => "2/03",
-    "swp67" => "2/04",
-    "swp68" => "2/05",
-    "swp69" => "2/06",
-    "swp70" => "2/07",
-    "swp71" => "2/08",
-    "swp72" => "2/09",
-    "swp73" => "2/10",
-    "swp74" => "2/11",
-    "swp75" => "2/12",
-    "swp76" => "2/13",
-    "swp77" => "2/14",
-    "swp78" => "2/15",
-    "swp79" => "2/16",
-    "swp80" => "2/17",
-    "swp81" => "2/18",
-    "swp82" => "2/19",
-    "swp83" => "2/20",
-    "swp84" => "2/21",
-    "swp85" => "2/22",
-    "swp86" => "2/23",
-    "swp87" => "2/24",
-    "swp88" => "2/25",
-    "swp89" => "2/26",
-    "swp90" => "2/27",
-    "swp91" => "2/28",
-    "swp92" => "2/29",
-    "swp93" => "2/30",
-    "swp94" => "2/31",
-    "swp95" => "2/32",
-    "swp96" => "2/33",
-    "swp97" => "2/34",
-    "swp98" => "2/35",
-    "swp99" => "2/36",
-    "swp100" => "2/37",
-    "swp101" => "2/38",
-    "swp102" => "2/39",
-    "swp103" => "2/40",
-    "swp104" => "2/41",
-    "swp105" => "2/42",
-    "swp106" => "2/43",
-    "swp107" => "2/44",
-    "swp108" => "2/45",
-    "swp109" => "2/46",
-    "swp110" => "2/47",
-    "swp111" => "2/48",
-    "swp112" => "2/49",
-    "swp113" => "2/50",
-    "swp128" => "3/01",
-    "swp129" => "3/02",
-    "swp130" => "3/03",
-    "swp131" => "3/04",
-    "swp132" => "3/05",
-    "swp133" => "3/06",
-    "swp134" => "3/07",
-    "swp135" => "3/08",
-    "swp136" => "3/09",
-    "swp137" => "3/10",
-    "swp138" => "3/11",
-    "swp139" => "3/12",
-    "swp140" => "3/13",
-    "swp141" => "3/14",
-    "swp142" => "3/15",
-    "swp143" => "3/16",
-    "swp144" => "3/17",
-    "swp145" => "3/18",
-    "swp146" => "3/19",
-    "swp147" => "3/20",
-    "swp148" => "3/21",
-    "swp149" => "3/22",
-    "swp150" => "3/23",
-    "swp151" => "3/24",
-    "swp152" => "3/25",
-    "swp153" => "3/26",
-    "swp154" => "3/27",
-    "swp155" => "3/28",
-    "swp156" => "3/29",
-    "swp157" => "3/30",
-    "swp158" => "3/31",
-    "swp159" => "3/32",
-    "swp160" => "3/33",
-    "swp161" => "3/34",
-    "swp162" => "3/35",
-    "swp163" => "3/36",
-    "swp164" => "3/37",
-    "swp165" => "3/38",
-    "swp166" => "3/39",
-    "swp167" => "3/40",
-    "swp168" => "3/41",
-    "swp169" => "3/42",
-    "swp170" => "3/43",
-    "swp171" => "3/44",
-    "swp172" => "3/45",
-    "swp173" => "3/46",
-    "swp174" => "3/47",
-    "swp175" => "3/48",
-    "swp176" => "3/49",
-    "swp177" => "3/50",
-    "swp192" => "4/01",
-    "swp193" => "4/02",
-    "swp194" => "4/03",
-    "swp195" => "4/04",
-    "swp196" => "4/05",
-    "swp197" => "4/06",
-    "swp198" => "4/07",
-    "swp199" => "4/08",
-    "swp200" => "4/09",
-    "swp201" => "4/10",
-    "swp202" => "4/11",
-    "swp203" => "4/12",
-    "swp204" => "4/13",
-    "swp205" => "4/14",
-    "swp206" => "4/15",
-    "swp207" => "4/16",
-    "swp208" => "4/17",
-    "swp209" => "4/18",
-    "swp210" => "4/19",
-    "swp211" => "4/20",
-    "swp212" => "4/21",
-    "swp213" => "4/22",
-    "swp214" => "4/23",
-    "swp215" => "4/24",
-    "swp216" => "4/25",
-    "swp217" => "4/26",
-    "swp218" => "4/27",
-    "swp219" => "4/28",
-    "swp220" => "4/29",
-    "swp221" => "4/30",
-    "swp222" => "4/31",
-    "swp223" => "4/32",
-    "swp224" => "4/33",
-    "swp225" => "4/34",
-    "swp226" => "4/35",
-    "swp227" => "4/36",
-    "swp228" => "4/37",
-    "swp229" => "4/38",
-    "swp230" => "4/39",
-    "swp231" => "4/40",
-    "swp232" => "4/41",
-    "swp233" => "4/42",
-    "swp234" => "4/43",
-    "swp235" => "4/44",
-    "swp236" => "4/45",
-    "swp237" => "4/46",
-    "swp238" => "4/47",
-    "swp239" => "4/48",
-    "swp240" => "4/49",
-    "swp241" => "4/50",
-    "enet0" => "enet0",
-    "enif0" => "enif0",
-    "swif0" => "swif0",
-    "swif2" => "swif2",
-    "cmif0" => "cmif0",
-    "swif4" => "swif4",
-    "swif5" => "swif5",
-    "swif6" => "swif6",
-    "swif7" => "swif7",
-    "swif8" => "swif8"
-);
+//Logically convert swp ports to human readable
+function swpConvert($port) {
+    //only convert swp ports
+    if (substr( $port, 0, 3 ) === "swp") {
+        $portNum = preg_replace('/[a-z]+/', '', $port);
+        if ( $portNum < 50 ) { 
+            $portNum++;
+            //Leading 0 for single digits
+            if ($portNum < 10) {
+                $newNum = "1/0" . $portNum;
+            } else {
+                $newNum = "1/" . $portNum;
+            }
+        }   
+        if ( $portNum > 63 && $portNum < 128) {
+            $portNum = $portNum - 63;
+            //Leading 0 for single digits
+            if ($portNum < 10) {
+                $newNum = "2/0" . $portNum;
+            } else {
+                $newNum = "2/" . $portNum;
+            }
+        }   
+        if ( $portNum > 127 && $portNum < 192) {
+            $portNum = $portNum - 127;
+            //Leading 0 for single digits
+            if ($portNum < 10) {
+                $newNum = "3/0" . $portNum;
+            } else {
+                $newNum = "3/" . $portNum;
+            }
+        }   
+        if ($portNum > 191) {
+            $portNum = $portNum - 191;
+            //Leading 0 for single digits
+            if ($portNum < 10) {
+                $newNum = "4/0" . $portNum;
+            } else {
+                $newNum = "4/" . $portNum;
+            }
+        }   
+        return $newNum;
+    }
+}
 
 //loop through ports
 foreach ($port_stats as $index => $port) {
-
-    // Make ifDescr match zyxel port array using include
+    // Make ifDescr match zyxel port using swpConvert function
 
     //current port name:
     $portIfName = $port['ifName'];
 
-    //new varible with new port port name
-    $ifDescr = $zyxel_ports[$portIfName];
+    //new varible with new port name
+    $ifDescr = swpConvert($portIfName);
 
     //set the libre ifDescr value to new port name
     $port_stats[$index]['ifDescr'] = $ifDescr;
