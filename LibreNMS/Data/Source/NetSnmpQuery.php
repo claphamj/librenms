@@ -133,13 +133,13 @@ class NetSnmpQuery implements SnmpQueryInterface
      * Set a context for the snmp query
      * This is most commonly used to fetch alternate sets of data, such as different VRFs
      *
-     * @param  string  $v2  Version 2/3 context name
-     * @param  string|null  $v3  Version 3 context name if different from v2 context name
+     * @param  string|null  $v2  Version 2/3 context name
+     * @param  string|null  $v3_prefix  Optional context prefix to prepend for Version 3 queries
      * @return \LibreNMS\Data\Source\SnmpQueryInterface
      */
-    public function context(string $v2, string $v3 = null): SnmpQueryInterface
+    public function context(?string $v2, ?string $v3_prefix = null): SnmpQueryInterface
     {
-        $this->context = $this->device->snmpver === 'v3' && $v3 !== null ? $v3 : $v2;
+        $this->context = ($this->device->snmpver === 'v3' ? $v3_prefix : '') . $v2;
 
         return $this;
     }
@@ -269,7 +269,7 @@ class NetSnmpQuery implements SnmpQueryInterface
 
     private function buildCli(string $command, array $oids): array
     {
-        $cmd = $this->initCommand($command);
+        $cmd = $this->initCommand($command, $oids);
 
         array_push($cmd, '-M', $this->mibDirectories());
 
@@ -349,9 +349,13 @@ class NetSnmpQuery implements SnmpQueryInterface
         return new SnmpResponse($output, $stderr, $exitCode);
     }
 
-    private function initCommand(string $binary): array
+    private function initCommand(string $binary, array $oids): array
     {
-        if ($binary == 'snmpwalk' && $this->device->snmpver !== 'v1' && Config::getOsSetting($this->device->os, 'snmp_bulk', true)) {
+        if ($binary == 'snmpwalk'
+            && $this->device->snmpver !== 'v1'
+            && Config::getOsSetting($this->device->os, 'snmp_bulk', true)
+            && empty(array_intersect($oids, Config::getCombined($this->device->os, 'oids.no_bulk'))) // skip for oids that do not work with bulk
+        ) {
             $snmpcmd = [Config::get('snmpbulkwalk', 'snmpbulkwalk')];
 
             $max_repeaters = $this->device->getAttrib('snmp_max_repeaters') ?: Config::getOsSetting($this->device->os, 'snmp.max_repeaters', Config::get('snmp.max_repeaters', false));
